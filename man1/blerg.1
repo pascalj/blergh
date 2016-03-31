@@ -1,0 +1,46 @@
+.TH blergh 1 2016-03-31 "Pascal Jungblut" "User manuals"
+.SH NAME
+blergh \- generate podcasts with streamripper
+
+.SH SYNOPSIS
+.B blergh [ -b
+.I base_path
+.B ] [ -c
+.I config
+.B ] [ -d
+.I podcasts_dir
+.B ] [ -g ] [ -h
+.I host
+.B ] [ -s
+.I streamripper
+.B ]
+.I name duration url
+.SH DESCRIPTION
+.B blergh
+records podcasts and generate the XML file for the recorded episodes. It
+can be used in conjuction with
+.BR cron (1)
+to start a recording regularly. The resulting XML files then need to be
+serverd by a simple HTTP server.
+
+.SH OPTIONS
+.IP "-b base_path"
+Use BASE_PATH as the working directory. All files and directories will be created here. Default: ~/podcasts
+.IP "-c config"
+Load the config file before executing. The variables defined there will overwrite the defaults.
+.IP "-d podcast_dir"
+Sets the directory for the current podcast. Default: base_path/name
+.IP -g
+Don't record, just
+.I generate
+the XML files. Useful for when you deleted files.
+.IP "-h host"
+Set host as the hostname the will be prefixed in the podcast feed. Example: -h http://example.com/audio/
+.IP "-S streamripper"
+Set the path to
+.I streamripper.
+blergh will try to find it using
+.BR which(1)
+\.
+.SH AUTHOR
+Pascal Jungblut <oss@pascalj.de>
