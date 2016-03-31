@@ -37,6 +37,13 @@ OPTIONS
               Set the path to streamripper.  blergh will try to find it  using
               which(1)
 
+
+EXAMPLES
+       blergh mycast 60 http://example.com/stream.mp3
+              Record  the  podcast  mycast  for  60  minutes from http://exam‐
+              ple.com/stream.mp3
+
+
 AUTHOR
        Pascal Jungblut <oss@pascalj.de>
 
