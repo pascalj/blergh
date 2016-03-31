@@ -12,11 +12,7 @@ URL=
 
 loadConfig () {
         CONFIG_FILE=$1
-        if [ ! -f $CONFIG_FILE ]
-        then
-                echo "Could not find config file \"$CONFIG_FILE\"" >&2
-                exit 1
-        fi
+        [ -f $CONFIG_FILE ] || fail "Could not find config file \"$CONFIG_FILE\""
         . $1
 }
 
@@ -74,8 +70,8 @@ generateXML() {
         printf "$header" "$NAME" "$NAME" "$HOST" > $BASE_PATH/$NAME.xml
         listEpisodes | extractDate | while read episodeDate
         do
-                humanDate=`date -j -f %s $episodeDate +%d.%m.`
-                rfcDate=`date -j -f %s $episodeDate +"%a, %d %b %Y %T %z"`
+                humanDate=`date -j -r $episodeDate +%d.%m.`
+                rfcDate=`date -j -r $episodeDate +"%a, %d %b %Y %T %z"`
                 guid="$HOST/$NAME/$episodeDate"
                 url="$HOST/$NAME/$episodeDate.mp3"
                 printf "$item" "$NAME" "$humanDate" "$NAME" "$humanDate" "$rfcDate" "$guid" "$guid" "$DURATION" "$url" >> $BASE_PATH/$NAME.xml
