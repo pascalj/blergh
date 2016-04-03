@@ -54,6 +54,7 @@ generateXML() {
     <itunes:title>%s</itunes:title>
     <itunes:description></itunes:description>
     <link>%s</link>
+    %s
     <itunes:author>Blergh</itunes:author>'
         footer='</channel>
 </rss> '
@@ -67,7 +68,15 @@ generateXML() {
         <itunes:duration>%s</itunes:duration>
         <enclosure url="%s" type="audio/mpeg"/>
 </item>'
-        printf "$header" "$NAME" "$NAME" "$HOST" > $BASE_PATH/$NAME.xml
+        if [ -f "$PODCAST_DIR.png" ]
+        then
+          image="<itunes:image href=\"$HOST/$NAME.png\" />"
+        fi
+        if [ -f "$PODCAST_DIR.jpg" ]
+        then
+          image="<itunes:image href=\"$HOST/$NAME.jpg\" />"
+        fi
+        printf "$header" "$NAME" "$NAME" "$HOST" "$image" > $BASE_PATH/$NAME.xml
         listEpisodes | extractDate | while read episodeDate
         do
                 humanDate=`date -j -r $episodeDate +%d.%m.`
