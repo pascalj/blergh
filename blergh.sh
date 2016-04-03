@@ -80,7 +80,7 @@ generateXML() {
 }
 
 listEpisodes() {
-  find $PODCAST_DIR -name "*.mp3"
+  find $PODCAST_DIR -name "*.mp3" | sort -r
 }
 
 extractDate() {
