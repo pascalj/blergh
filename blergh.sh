@@ -2,8 +2,8 @@
 
 BASE_PATH=~/podcasts
 STREAMRIPPER=`which streamripper`
-PODCAST_DIR="$BASE_PATH/$NAME"
-OUTPATH=$PODCAST_DIR/$NAME/`date +%s`.mp3
+PODCAST_DIR=
+OUTPATH=
 RECORD=1
 HOST=
 NAME=
@@ -33,15 +33,15 @@ readArguments() {
         NAME=$1
         DURATION=$2
         URL=$3
-        [ -z PODCAST_DIR ] && PODCAST_DIR="$BASE_PATH/$NAME"
-        OUTPATH=$PODCAST_DIR/$NAME/`date +%s`.mp3
+        [ -z $PODCAST_DIR ] && PODCAST_DIR="$BASE_PATH/$NAME"
+        OUTPATH=$PODCAST_DIR/`date +%s`.mp3
 }
 
 record() {
         if [ $RECORD != "1" ]
         then return
         fi
-        mkdir -p "$PODCAST_DIR/$NAME" || fail "Cannot create output directory"
+        mkdir -p "$PODCAST_DIR" || fail "Cannot create output directory"
         $STREAMRIPPER "$URL" -s -A -a $OUTPATH -l `expr $DURATION "*" 60` --quiet
 }
 
@@ -68,6 +68,7 @@ generateXML() {
         <itunes:duration>%s</itunes:duration>
         <enclosure url="%s" type="audio/mpeg"/>
 </item>'
+        image=''
         if [ -f "$PODCAST_DIR.png" ]
         then
           image="<itunes:image href=\"$HOST/$NAME.png\" />"
