@@ -17,7 +17,7 @@ loadConfig () {
 }
 
 readArguments() {
-        while getopts :b:c:d:h:s: opt; do
+        while getopts :b:c:d:gh:s: opt; do
                 case "$opt" in
                         b) BASE_PATH=$OPTARG;;
                         c) loadConfig $OPTARG;;
