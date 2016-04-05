@@ -67,6 +67,7 @@ generateXML() {
         <guid>%s</guid>
         <itunes:duration>%s</itunes:duration>
         <enclosure url="%s" type="audio/mpeg"/>
+        %s
 </item>'
         image=''
         if [ -f "$PODCAST_DIR.png" ]
@@ -84,7 +85,7 @@ generateXML() {
                 rfcDate=`date -j -r $episodeDate +"%a, %d %b %Y %T %z"`
                 guid="$HOST/$NAME/$episodeDate"
                 url="$HOST/$NAME/$episodeDate.mp3"
-                printf "$item" "$NAME" "$humanDate" "$NAME" "$humanDate" "$rfcDate" "$guid" "$guid" "$DURATION" "$url" >> $BASE_PATH/$NAME.xml
+                printf "$item" "$NAME" "$humanDate" "$NAME" "$humanDate" "$rfcDate" "$guid" "$guid" "$DURATION" "$url" "$image" >> $BASE_PATH/$NAME.xml
         done
         printf "$footer\n" >> "$BASE_PATH/$NAME.xml"
 }
