@@ -100,6 +100,16 @@ extractDate() {
 
 validateSettings() {
   [ -x "$STREAMRIPPER" ] || fail "Could not find executable streamripper at '$STREAMRIPPER'"
+  [ "" = "$NAME" ] && usage
+  [ "" = "$URL" ] && usage
+  [ "" = "$DURATION" ] && usage
+}
+
+usage() {
+  echo "Usage:\n"
+  echo "blergh  [  ‐b base_path ] [ ‐c config ] [ ‐d podcasts_dir ] [ ‐g ] [ ‐h
+       host ] [ ‐s streamripper ] name duration url"
+  exit 1
 }
 
 blergh() {
